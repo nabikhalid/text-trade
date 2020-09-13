@@ -1,0 +1,5 @@
+1) nodejs.org, latest stable version
+
+2) cd to app, npm init, entry point: index.js, npm install express or npm init --yes, npm i express
+
+3) nodemon if you want
