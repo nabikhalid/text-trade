@@ -1,7 +1,7 @@
 # GPA Calculator
 Full Stack Web Development Project, GPA Calculator.
 
-As a student, I am constantly checking my GPA for eligibility for certain programs my school has to offer. This handy tool lets students sqiftly input their courses, grades, and credits to obtain an overall GPA (CGPA).  
+As a student, I am constantly checking my GPA for eligibility for certain programs my school has to offer. This handy tool lets students swiftly input their courses, grades, and credits to obtain an overall GPA (CGPA).  
 
 ## Set Up (Mac OS)
 1. Install Node. (https://nodejs.org/en/)
