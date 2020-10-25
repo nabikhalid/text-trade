@@ -17,14 +17,19 @@ app.use(express.json());
 // logic modelling
 
 var courses = [
-    {id: '', grade: '', credits: 0.0}
+    {id: 'EECS 2030', grade: 'A+', credits: 3}, 
+    {id: 'EECS 2040', grade: 'A+', credits: 3}, 
+    {id: 'EECS 2050', grade: 'A+', credits: 3}, 
+    {id: 'EECS 2060', grade: 'A+', credits: 3}, 
+    {id: 'EECS 2070', grade: 'A+', credits: 3}, 
+    {id: 'EECS 2080', grade: 'B+', credits: 3}
 ];
 
 // can change type of scale, 12-point, 4-point, etc.
 
 function calculateGPA(courses) {
-    var totalPoints, totalCredits;
-    for (i=0;i<courses.length;i++) {
+    var totalPoints = 0, totalCredits = 0, i;
+    for (i = 0; i < courses.length; i++) {
         totalPoints = totalPoints + gradeToPoints(courses[i].grade) * courses[i].credits;
         totalCredits = totalCredits + courses[i].credits;
     }
@@ -33,37 +38,37 @@ function calculateGPA(courses) {
 
 function gradeToPoints(letterGrade){
     if(letterGrade === 'A+') {
-        return 9.0;
+        return 9;
     }
     else if (letterGrade === 'A'){
-        return 8.0
+        return 8;
     }
     else if (letterGrade === 'B+'){
-        return 7.0;
+        return 7;
     }
     else if (letterGrade === 'B'){
-        return 6.0;
+        return 6;
     }
     else if (letterGrade === 'C+'){
-        return 5.0;
+        return 5;
     }
     else if (letterGrade === 'C'){
-        return 4.0;
+        return 4;
     }
     else if (letterGrade === 'D+'){
-        return 3.0;
+        return 3;
     }
     else if (letterGrade === 'D'){
-        return 2.0;
+        return 2;
     }
     else if (letterGrade === 'E'){
-        return 1.0;
+        return 1;
     }
     else if (letterGrade === 'F'){
-        return 0.0;
+        return 0;
     }
     else {
-        return -1.0;
+        return -1;
     }
 }
 
@@ -115,7 +120,7 @@ app.post('/input', (req, res) => {
 });
 
 app.get('/getgpa', (req, res) => {
-    res.send(calculateGPA(courses));
+    res.send(calculateGPA(courses).toFixed(5));
 });
 
 app.get('/courses', (req, res) => {
