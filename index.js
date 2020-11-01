@@ -10,19 +10,15 @@ app.use(express.json());
 // app.put();
 // app.delete();
 
-// app.get('/', function(req, res) {
-//     res.sendFile(path.join(__dirname, '/index.html'));
-// });
-
 // logic modelling
 
 var courses = [
-    {id: 'EECS 2030', grade: 'A+', credits: 3}, 
-    {id: 'EECS 2040', grade: 'A+', credits: 3}, 
-    {id: 'EECS 2050', grade: 'A+', credits: 3}, 
-    {id: 'EECS 2060', grade: 'A+', credits: 3}, 
-    {id: 'EECS 2070', grade: 'A+', credits: 3}, 
-    {id: 'EECS 2080', grade: 'B+', credits: 3}
+    // {id: 'EECS 2030', grade: 'A+', credits: 3}, 
+    // {id: 'EECS 2040', grade: 'A+', credits: 3}, 
+    // {id: 'EECS 2050', grade: 'A+', credits: 3}, 
+    // {id: 'EECS 2060', grade: 'A+', credits: 3}, 
+    // {id: 'EECS 2070', grade: 'A+', credits: 3}, 
+    // {id: 'EECS 2080', grade: 'B+', credits: 3}
 ];
 
 // can change type of scale, 12-point, 4-point, etc.
@@ -90,11 +86,15 @@ function validCredits(credits){
 
 // '/' is the root of a website
 // this is a route to root
-app.get('/', (req, res) => {
-    res.send('Hello, welcome to your GPA Calculator.');
+app.get('/api', (req, res) => {
+    res.send('Welcome to your 9-Point scale GPA Calculator.');
 });
 
-app.post('/input', (req, res) => {
+// app.get('/', function(req, res) {
+//     res.sendFile(path.join(__dirname, '/index.html'));
+// });
+
+app.post('/api/input', (req, res) => {
     // input validation
     if(!req.body.id || !req.body.grade || !req.body.credits){
         res.status(400).send('One of your course ID, grade, or credits is missing.');
@@ -119,15 +119,15 @@ app.post('/input', (req, res) => {
     res.status(400).send('Course is already in database.');
 });
 
-app.get('/getgpa', (req, res) => {
+app.get('/api/getgpa', (req, res) => {
     res.send(calculateGPA(courses).toFixed(5));
 });
 
-app.get('/courses', (req, res) => {
+app.get('/api/courses', (req, res) => {
     res.send(courses);
 });
 
-app.get('/courses/:id', (req, res) => {
+app.get('/api/courses/:id', (req, res) => {
     // backend logic
     let course = courses.find(c => c.id === req.params.id);
     // 404 not found
@@ -146,7 +146,7 @@ app.get('/courses/:id', (req, res) => {
 // put 
 // finish this, update for text, not courses
 
-app.put('/courses/:id', (req, res) => {
+app.put('/api/courses/:id', (req, res) => {
     // find the course, if doesn't exist, 404
     let course = courses.find(c => c.id === req.params.id);
     // 404 not found
@@ -169,7 +169,7 @@ app.put('/courses/:id', (req, res) => {
     res.send(course);
 });
 
-app.delete('/courses/:id', (req, res) => {
+app.delete('/api/courses/:id', (req, res) => {
     let course = courses.find(c => c.id === req.params.id);
     // 404 not found
     if (!course) {
